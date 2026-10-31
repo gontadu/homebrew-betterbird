@@ -9,7 +9,7 @@ cask "betterbird" do
 
   livecheck do
     url "https://www.betterbird.eu/downloads/"
-    regex(/Current version: Betterbird (\d+(?:\.\d+)+esr-bb\d+)/i)
+    regex(/Current version: Betterbird \d+(?:\.\d+)+ ESR \((\d+(?:\.\d+)+esr-bb\d+)/i)
   end
 
   conflicts_with cask: "thunderbird@esr"
