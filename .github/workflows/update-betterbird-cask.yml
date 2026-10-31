@@ -1,0 +1,42 @@
+name: Update Betterbird cask
+
+on:
+  schedule:
+    - cron: "23 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: update-betterbird-cask
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update cask version
+        run: ruby script/update-betterbird-version.rb
+
+      - name: Validate cask
+        run: brew style Casks/betterbird.rb
+
+      - name: Create or update pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            chore: Update Betterbird cask version
+
+            Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+          branch: automation/update-betterbird-cask
+          delete-branch: true
+          title: "chore: Update Betterbird cask version"
+          body: |
+            Updates the cask version to the latest release listed by Betterbird.
+
+            The cask currently uses `sha256 :no_check`.
