@@ -1,5 +1,5 @@
 cask "betterbird" do
-  version "153.6.0esr-bb12"
+  version "153.7.0esr-bb13"
   sha256 :no_check
 
   url "https://www.betterbird.eu/downloads/get.php?os=mac-arm64&lang=en-US&version=release"
